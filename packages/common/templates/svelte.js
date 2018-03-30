@@ -1,5 +1,3 @@
-// @flow
-
 import SvelteIcon from 'common/components/logos/Svelte';
 import Template from './template';
 import { decorateSelector } from '../theme';

@@ -1,5 +1,3 @@
-// @flow
-
 import PreactIcon from 'common/components/logos/Preact';
 import Template from './template';
 import { decorateSelector } from '../theme';

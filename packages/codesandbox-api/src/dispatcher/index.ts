@@ -2,8 +2,7 @@
 import host from './host';
 
 // Whether the tab has a connection with the editor
-export const isStandalone =
-  typeof window === 'undefined' || (!window.opener && window.parent === window);
+export const isStandalone = typeof window === 'undefined' || (!window.opener && window.parent === window);
 
 /**
  * Send a message to the editor, this is most probably an action you generated
@@ -13,21 +12,21 @@ export const isStandalone =
  * @returns
  */
 export function dispatch(message: Object) {
-  if (!message) return;
+    if (!message) return;
 
-  const newMessage = { ...message, codesandbox: true };
-  notifyListeners(newMessage);
+    const newMessage = { ...message, codesandbox: true };
+    notifyListeners(newMessage);
 
-  if (isStandalone) return;
+    if (isStandalone) return;
 
-  if (window.opener) {
-    window.opener.postMessage(newMessage, host);
-  } else {
-    window.parent.postMessage(newMessage, host);
-  }
+    if (window.opener) {
+        window.opener.postMessage(newMessage, host);
+    } else {
+        window.parent.postMessage(newMessage, host);
+    }
 }
 
-export type Callback = (message: Object, source?: Window) => void;
+export type Callback = (message: Object, source?: any) => void;
 
 const listeners: { [id: string]: Callback } = {};
 let listenerId = 0;
@@ -37,32 +36,32 @@ let listenerId = 0;
  * @param callback Call this function to 'unlisten'
  */
 export function listen(callback: Callback): () => void {
-  const id = ++listenerId;
-  listeners[id] = callback;
+    const id = ++listenerId;
+    listeners[id] = callback;
 
-  return () => {
-    delete listeners[id];
-  };
+    return () => {
+        delete listeners[id];
+    };
 }
 
 export function notifyListeners(data: Object, source?: MessageEvent['source']) {
-  Object.keys(listeners).forEach(listenerId => {
-    if (listeners[listenerId]) {
-      listeners[listenerId](data, source);
-    }
-  });
+    Object.keys(listeners).forEach((listenerId) => {
+        if (listeners[listenerId]) {
+            listeners[listenerId](data, source);
+        }
+    });
 }
 
 function eventListener(e: MessageEvent) {
-  const { data } = e;
-  if (data.codesandbox) {
-    notifyListeners(data, e.source);
-  }
+    const { data } = e;
+    if (data.codesandbox) {
+        notifyListeners(data, e.source);
+    }
 }
 
 // We now start listening so we can let our listeners know
 window.addEventListener('message', eventListener);
 
 export function reattach() {
-  window.addEventListener('message', eventListener);
+    window.addEventListener('message', eventListener);
 }

@@ -1,4 +1,3 @@
-// @flow
 import ReactIcon from 'common/components/logos/React';
 
 import Template from './template';

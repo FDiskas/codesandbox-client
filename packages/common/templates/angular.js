@@ -1,5 +1,3 @@
-// @flow
-
 import { absolute, join } from 'common/utils/path';
 
 import AngularIcon from 'common/components/logos/Angular';
@@ -11,7 +9,7 @@ class AngularTemplate extends Template {
   /**
    * Override entry file because of angular-cli
    */
-  getEntries(configurationFiles: { [type: string]: Object }): Array<string> {
+  getEntries(configurationFiles) {
     const entries = [];
     const { parsed } = configurationFiles['angular-cli'];
 
@@ -36,9 +34,7 @@ class AngularTemplate extends Template {
     return entries;
   }
 
-  getHTMLEntries(configurationFiles: {
-    [type: string]: Object,
-  }): Array<string> {
+  getHTMLEntries(configurationFiles) {
     const entries = [];
     const { parsed } = configurationFiles['angular-cli'];
 

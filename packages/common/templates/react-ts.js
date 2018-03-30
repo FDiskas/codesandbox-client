@@ -1,5 +1,3 @@
-// @flow
-
 import ReactIcon from 'common/components/logos/React';
 import configurations from './configuration';
 

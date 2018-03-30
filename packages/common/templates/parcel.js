@@ -1,5 +1,3 @@
-// @flow
-
 import ParcelIcon from 'common/components/logos/Parcel';
 import Template from './template';
 import { decorateSelector } from '../theme';

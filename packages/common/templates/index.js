@@ -1,4 +1,3 @@
-// @flow
 import angular from './angular';
 import vue from './vue';
 import react from './react';
@@ -9,16 +8,7 @@ import parcel from './parcel';
 
 export { angular, vue, react, reactTs, preact, svelte, parcel };
 
-export default function getDefinition(
-  theme:
-    | 'create-react-app'
-    | 'vue-cli'
-    | 'preact-cli'
-    | 'svelte'
-    | 'create-react-app-typescript'
-    | 'angular-cli'
-    | 'parcel'
-) {
+export default function getDefinition(theme) {
   switch (theme) {
     case react.name:
       return react;
